@@ -60,9 +60,24 @@ For both methods the following steps are the same:
 ## Running the model
 
 Example of command line to execute : 
+```
 python skipGram.py --news/news.en-00001-of-00100.txt --model news
-
+```
 The command uses the news.en-00001-of-00100.txt as training set and saves the word embeddings in news file.
 
+Example :
+news.en-00001-of-00100.txt  file containing :
+- 306 068 sentences (kept only 10 000)
+- 219 305 words
+- 1020658 positive pairs
+- 5103290 negative pairs
+- 4901 unique words 
+
 Example of the out of the previous command
+
+![Model training](training_model.PNG)
+
+
+
+
 
