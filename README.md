@@ -75,9 +75,40 @@ news.en-00001-of-00100.txt  file containing :
 
 Example of the out of the previous command
 
-![Model training](training_model.PNG)
+```
+TRAINING: #epochs: 5, learning_rate: 0.01, batch size: 512
+Epoch 1/5
+100%|██████████████████████████████████████| 1993/1993 [06:46<00:00,  5.12it/s]
+(406.68s)
+Epoch 2/5
+100%|██████████████████████████████████████| 1993/1993 [06:26<00:00,  4.41it/s]
+(386.14s)
+Epoch 3/5
+100%|██████████████████████████████████████| 1993/1993 [06:25<00:00,  5.10it/s]
+(385.29s)
+Epoch 4/5
+100%|██████████████████████████████████████| 1993/1993 [06:26<00:00,  5.08it/s]
+(386.73s)
+Epoch 5/5
+100%|██████████████████████████████████████| 1993/1993 [06:27<00:00,  4.76it/s]
+(387.78s)
+```
 
+## Testing the model
 
+To compute the similarity between two words 
+We computed the similarity between the word "woman" and all the words of the corpus, and printed its 6 most similar words :
+```
+Similar words for woman :
+- mother : 0.9886263754995515
+- father : 0.9812123247845269
+- man : 0.9736604975898733
+- ms : 0.966897841735729
+- old : 0.9662014731670675
+- son : 0.9658628442598071
+```
 
+To compute the similarity between two words, the command to use is:
 
+```
 
