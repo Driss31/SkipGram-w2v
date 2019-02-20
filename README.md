@@ -127,7 +127,7 @@ Similar words for president :
 ```
 
 10 most similar words to "financial":
-
+```
 Similar words for financial :
 - economic : 0.8605254987941997
 - banking : 0.8543459085572801
@@ -139,7 +139,7 @@ Similar words for financial :
 - energy : 0.7923018373003
 - markets : 0.7898427369024803
 - european : 0.7891532793944722
-
+```
 10 most similar words to "barack":
 
 ```
