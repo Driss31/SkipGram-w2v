@@ -48,7 +48,7 @@ Two different methods were tested here. The second one gave us much better resul
 ### Method 1 : Creating one and only one embedding for each word
 For a corpus containing 1000 unique words, we will compute a matrix of 1000 columns where each column contains the embedding of a unique word
 
-### Method 2 : Creating an embedding for words and one for contexts
+### Method 2 : Creating an embedding for words and one for contexts. Each word will have an embedding as a target word and another embedding as a context.
 For a corpus containing 1000 unique words, we will compute a matrix of 1000 + 1000 words where for each unique word, we will compute its embedding as a word and its embedding as a context.
 
 For both methods the following steps are the same:
@@ -67,48 +67,94 @@ The command uses the news.en-00001-of-00100.txt as training set and saves the wo
 
 Example :
 news.en-00001-of-00100.txt  file containing :
-- 306 068 sentences (kept only 10 000)
-- 219 305 words
-- 1020658 positive pairs
-- 5103290 negative pairs
-- 4901 unique words 
+- 50 000 sentences
+- 1 094 214 words
+- 5 576 574 positive pairs
+- 27 882 870 negative pairs
+- 14 033 unique words 
 
 Example of the out of the previous command
 
 ```
-TRAINING: #epochs: 5, learning_rate: 0.01, batch size: 512
+TRAINING: #epochs: 5, learning_rate: 0.01, batch size: 500, negativeRate: 5, winSize: 7 (+- 3)
 Epoch 1/5
-100%|██████████████████████████████████████| 1993/1993 [06:46<00:00,  5.12it/s]
-(406.68s)
+100%|████████████████████████████████████| 11153/11153 [39:43<00:00,  4.65it/s]
+(2383.19s)
 Epoch 2/5
-100%|██████████████████████████████████████| 1993/1993 [06:26<00:00,  4.41it/s]
-(386.14s)
+100%|████████████████████████████████████| 11153/11153 [39:49<00:00,  4.90it/s]
+(2389.63s)
 Epoch 3/5
-100%|██████████████████████████████████████| 1993/1993 [06:25<00:00,  5.10it/s]
-(385.29s)
+100%|████████████████████████████████████| 11153/11153 [39:59<00:00,  4.50it/s]
+(2399.69s)
 Epoch 4/5
-100%|██████████████████████████████████████| 1993/1993 [06:26<00:00,  5.08it/s]
-(386.73s)
+100%|████████████████████████████████████| 11153/11153 [39:51<00:00,  4.68it/s]
+(2391.43s)
 Epoch 5/5
-100%|██████████████████████████████████████| 1993/1993 [06:27<00:00,  4.76it/s]
-(387.78s)
+100%|████████████████████████████████████| 11153/11153 [40:44<00:00,  4.66it/s]
+(2444.83s)
 ```
 
 ## Testing the model
 
-To compute the similarity between two words 
-We computed the similarity between the word "woman" and all the words of the corpus, and printed its 6 most similar words :
-```
-Similar words for woman :
-- mother : 0.9886263754995515
-- father : 0.9812123247845269
-- man : 0.9736604975898733
-- ms : 0.966897841735729
-- old : 0.9662014731670675
-- son : 0.9658628442598071
-```
-
-To compute the similarity between two words, the command to use is:
+To compute the similarity between two words, we used the cosine distance. The command to use is:
 
 ```
+python skipGram.py --text data/test_odyssey.csv --model odyssey_model --test
+```
 
+Some examples obtained:
+"woman", "girl"    : 0.9140292408030202
+"woman", "man"     : 0.9003719041046656
+"woman", "fish"    : 0.6480981482215702
+"woman", "bicycle" : 0.5525813805008297
+"woman", "green"   : 0.41096331164361916
+"woman", "red"     : 0.4022941792833647
+"woman", "grizzly" : (Out of Vocabulary -> Grizzly) 0.2520814392860999
+
+We computed the similarity between the word "president" and all the words of the corpus, and printed its 10 most similar words :
+```
+Similar words for president :
+- prime : 0.8675725528021508
+- minister : 0.8577274635745533
+- barack : 0.8476139485196841
+- vice : 0.8338346066461706
+- senator : 0.8303469441871172
+- presidentelect : 0.8234193469697527
+- bush : 0.8217018577730855
+- governor : 0.8114519753665658
+- john : 0.8096632753090216
+- hillary : 0.7903915606521152
+```
+
+10 most similar words to "financial":
+
+Similar words for financial :
+- economic : 0.8605254987941997
+- banking : 0.8543459085572801
+- housing : 0.8391836329291854
+- global : 0.8367757803069268
+- institutions : 0.8249920995141922
+- development : 0.7974591339002757
+- crisis : 0.7927191095780013
+- energy : 0.7923018373003
+- markets : 0.7898427369024803
+- european : 0.7891532793944722
+
+10 most similar words to "barack":
+
+```
+Similar words for barack :
+- clinton : 0.8967130891694537
+- obama : 0.873172647247945
+- hillary : 0.8581969823452125
+- president : 0.8476139485196841
+- mccain : 0.8474739064219333
+- presidentelect : 0.8384489353566097
+- bush : 0.8324913896640769
+- nominee : 0.8144799174125398
+- candidate : 0.8100265607338628
+- senator : 0.8096392472156546
+```
+
+## References
+[1] Yoav Goldberg and Omer Levy _word2vec Explained: Deriving Mikolov et al.’s Negative-Sampling Word-Embedding Method_. 2014
