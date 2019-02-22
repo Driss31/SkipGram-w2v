@@ -8,15 +8,15 @@ Output: embedding of the words in the corpus
 ## Prerequisites
 
 We used these libraries:
-argparse
-pandas as pd
-numpy as np
-re  # Used to split text into sentences
-string  # Used to get all punctuation
-pickle  # Used to save and load embeddings
-logging  # Used to save steps in a text file instead of printing them
-tqdm  # Used measure and estimate the time it takes to run the script
-scipy.special (expit)  # Used to compute the gradient
+- argparse
+- pandas as pd
+- numpy as np
+- re  # Used to split text into sentences
+- string  # Used to get all punctuation
+- pickle  # Used to save and load embeddings
+- logging  # Used to save steps in a text file instead of printing them
+- tqdm  # Used measure and estimate the time it takes to run the script
+- scipy.special (expit)  # Used to compute the gradient
 
 ## Preprocessing data
 
@@ -101,6 +101,7 @@ python skipGram.py --text train/news.en-00001-of-00100.txt --model train --test
 ```
 
 Some examples obtained:
+```
 "woman", "girl"    : 0.9140292408030202
 "woman", "man"     : 0.9003719041046656
 "woman", "fish"    : 0.6480981482215702
@@ -108,6 +109,7 @@ Some examples obtained:
 "woman", "green"   : 0.41096331164361916
 "woman", "red"     : 0.4022941792833647
 "woman", "grizzly" : (Out of Vocabulary -> Grizzly) 0.2520814392860999
+```
 
 We computed the similarity between the word "president" and all the words of the corpus, and printed its 10 most similar words :
 ```
